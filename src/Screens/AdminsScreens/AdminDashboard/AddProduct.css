@@ -1,0 +1,71 @@
+.ContinerAddproduct {
+    Background-color: #c46ea4;
+    height: 100vh;
+    width: '100%';
+
+    
+}
+.input{
+    padding: 10px;
+   outline: none;
+   border: 1px solid rgb(12, 12, 241);
+   border-radius: 15px;
+   background-color: none;
+   margin: 10px;
+}
+.buttons {
+    border-radius: 25px; 
+    color: rgb(50, 30, 30); 
+    font-weight:bold ; 
+    display: grid;
+    
+
+    
+
+}
+.buttons:hover {
+    border-radius: 25px;
+    color: rgb(209, 20, 20);
+    background-color:white;
+    border: none;
+    
+} 
+
+
+    .Numberprice::-webkit-outer-spin-button,
+    .Numberprice::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.Numberprice[type=number] {
+  -moz-appearance: textfield;
+}
+
+.productCatigorylistContiner{
+     width:200px;
+     height:150px;
+     background-color:white;
+     padding:20px;
+     border-radius:25px;
+
+
+}
+
+
+.productCatigoryitem:hover{
+      color:red
+}
+
+.productCatigoryButton{
+  border-radius: 25px;
+  background-color:white;
+  color:blue;
+  border: none;
+}
+
+.productCatigoryButton:hover{
+   background-color:blue;
+   color:white;
+}

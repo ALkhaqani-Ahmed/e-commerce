@@ -1,0 +1,22 @@
+.product-cardContiner{
+    display: inline block;
+       width:200px;
+       height:400px ;
+       overflow: hidden;
+       flex-direction: column;
+       justify-content: center;
+       align-items: center;
+       
+}
+.TextCntiner{
+    flex: 1;
+}
+.imageCntiner{
+    flex:1;
+    
+}
+
+.TextCntiner p {
+    padding: 0;
+    margin: 0;
+}

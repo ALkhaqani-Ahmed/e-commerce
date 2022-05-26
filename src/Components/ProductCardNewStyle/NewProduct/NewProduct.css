@@ -1,0 +1,23 @@
+
+
+.NewProduct_container {
+    display: inline-block;
+    justify-content: flex-end;
+
+}
+
+.NewProduct_title {
+    font-size:2px;
+    border-color: black solid;
+    font-weight: bold;
+}
+
+.NewProduct_image {
+    width:400px;
+    height: 600px;
+
+}
+.Product_discription {
+    text-align: left;
+
+}

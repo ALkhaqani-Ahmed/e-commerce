@@ -1,0 +1,45 @@
+.ContinerSignup{
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction:column;
+align-content: center;
+background: linear-gradient(90deg, rgb(4, 2, 60) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+height: 100vh;
+}
+
+
+.inputSignup{
+    padding: 15px;
+   outline: none;
+   border: 1px solid blue;
+   border-radius: 25px;
+   background-color: none;
+   margin: 10px;
+}
+
+
+.SignupButton p{
+    text-align: center;
+    margin: 0 auto;
+}
+.SignupButton{
+
+    border-radius: 25px;
+    color: white;
+    background-color:blue;
+    border: none;
+    padding:15px
+  
+
+}
+
+.SignupButton:hover{
+
+    border-radius: 25px;
+    color: blue;
+    background-color:white;
+    border: none;
+    
+    
+}

@@ -1,0 +1,27 @@
+
+
+
+
+.productName {
+    font-weight:bold; 
+    color:blue;
+}
+
+.productCategory {
+    font-weight:bold;
+    color:rgb(35, 35, 69); 
+}
+
+.productPrice{
+    font-weight:bold;
+    color: red;
+}
+
+.imgCardUsercontainer{
+    width:200px;
+    height:200px;
+}
+.ContinerProductPage{
+    padding: 100px;
+
+}
