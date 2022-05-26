@@ -5,7 +5,7 @@ import store from './Features/store';
 import {Provider} from 'react-redux';
 
 function App() {
-
+//comment add new
 
 return(
     <div className="App">
