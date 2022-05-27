@@ -13,7 +13,8 @@ const initialState= {
     SendingCommentState:false,
     commentss:[],
     currentRating:0,
-    SearchResult:[]
+    SearchResult:[],
+    DisscountsendingState:false,
 
 }
 
@@ -49,12 +50,14 @@ const initialState= {
 
 
   export const AddDiscountToProduct = createAsyncThunk('product/addDiscount' ,async(data ,thunkApI)=>{
-    const response = await Axios.patch(`https://eshop-api-621e2-default-rtdb.firebaseio.com/products/${data.productid}.json`,{Discount:{state:true , value:data.value}}).then(res => res);
+    const response = await Axios.patch(`https://eshop-api-621e2-default-rtdb.firebaseio.com/products/${data.productid}.json`,
+    {Discount:{state:data.state , value:data.value}}).then(res => res);
     return response ;
   });
 
   export const MakeDisccountFalseORTure = createAsyncThunk('product/editeDiscount' ,async(data , thunkApI)=>{
-    const response = await Axios.patch(`https://eshop-api-621e2-default-rtdb.firebaseio.com/products/${data.productid}.json`,{Discount:{state:data.state,value:data.value}}).then(res => res);
+    const response = await Axios.patch(`https://eshop-api-621e2-default-rtdb.firebaseio.com/products/${data.productid}.json`,
+    {Discount:{state:data.state,value:data.value}}).then(res => res);
     return response ;
   })
 
@@ -233,6 +236,10 @@ export const productRedcerSlice = createSlice({
         state.commentss = [...CopyComment];
       });
 
+      build.addCase(MakeDisccountFalseORTure.fulfilled, (state,action)=>{
+          state.DisscountsendingState = true ;
+      })
+
     }
 
   });    
@@ -247,6 +254,7 @@ export const CommentFromServer = state => state.productsStoreSlice.commentss;
 export const sendingcomenntstate = state => state.productsStoreSlice.SendingCommentState ;
 export const currentRating = state => state.productsStoreSlice.currentRating ;
 export const SearchResult = state => state.productsStoreSlice.SearchResult ;
+export const DisscountLoadingState = state => state.productsStoreSlice.DisscountsendingState;
 
 export default productRedcerSlice.reducer;
 

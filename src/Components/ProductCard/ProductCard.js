@@ -227,8 +227,8 @@
 import React,{Fragment, useEffect, useState} from 'react';
 // import {Link} from 'react-router-dom';
 import './ProductCard.css';
-import {useDispatch} from 'react-redux';
-import {AddToCart,IncrementQuantity, DecremntQuantity, DeleteProduct,DeleteProductFromServer,AddDiscountToProduct,MakeDisccountFalseORTure} from '../../Features/ProductsReducer';
+import {useDispatch,useSelector} from 'react-redux';
+import {AddToCart,IncrementQuantity, DisscountLoadingState,DecremntQuantity, DeleteProduct,DeleteProductFromServer,getAllProudtsFromServer,AddDiscountToProduct,MakeDisccountFalseORTure} from '../../Features/ProductsReducer';
 import {Button} from 'react-bootstrap';
 import {useNavigate} from 'react-router-dom';
 
@@ -236,6 +236,7 @@ import {useNavigate} from 'react-router-dom';
 
 const ProductCard = props =>{
     const dispach = useDispatch();
+    const  DisscountStateloading = useSelector(DisscountLoadingState);
    const ID = props.id ;
     const path = window.location.pathname;
     const [ToggleDisscountState ,SetToggleDisscountState] = useState(false);
@@ -243,29 +244,35 @@ const ProductCard = props =>{
     const [Value ,SetValue] = useState();
     const [newPRice , Setnewprice] = useState();
     const [haveDisscount ,setHaveDisscount  ] = useState();
+    const [ValueDisscount , setValueDisscount] = useState();
 
 
     const AddTocartHandler = () =>{
         dispach(AddToCart(props.id));
     }
-
+useEffect(()=>{
+    dispach(getAllProudtsFromServer());
+},[DisscountStateloading])
     
 
 const ToggeleDiscountConntent = () =>ToggleDisscountState? SetToggleDisscountState(false): SetToggleDisscountState(true);
 
     const AddDisscount =()=>{
-           dispach(AddDiscountToProduct({productid:props.id , value:Value}));
-           SetValue();
+           dispach(MakeDisccountFalseORTure({productid:props.id , value:Value, state:true}));
+           setHaveDisscount(true);
+           setValueDisscount(Value);
+
     }
 
 
     const makeDisccountOnOrOff = () => {
+        const disscountValue = Value ? Value : props.elemnt.Discount.value ;
        if(haveDisscount){
-        dispach(MakeDisccountFalseORTure({productid:props.id ,state:false}));  
-        setHaveDisscount(false)
+        dispach(MakeDisccountFalseORTure({productid:props.id ,value:disscountValue,state:false}));  
+        setHaveDisscount(false);
        }else{
-        dispach(MakeDisccountFalseORTure({productid:props.id ,state:true ,value:Value?Value:props.elemnt.Discount.value}));  
-        setHaveDisscount(true)
+        dispach(MakeDisccountFalseORTure({productid:props.id ,state:true ,value:disscountValue}));  
+        setHaveDisscount(true);
        }
            
         
@@ -287,9 +294,8 @@ const ToggeleDiscountConntent = () =>ToggleDisscountState? SetToggleDisscountSta
 
 
 useEffect(()=>{
-
         if(props.elemnt.Discount){
-            const ValueDisscount = parseInt(props.elemnt.Discount.value) ;
+            setValueDisscount(Value ? Value: parseInt(props.elemnt.Discount.value)) ;
             const oldPrice = parseInt(props.price);
              const disscountAmount =  (ValueDisscount *oldPrice)/100;
               const calasnewPrice = oldPrice - disscountAmount ;
@@ -298,13 +304,13 @@ useEffect(()=>{
         }
     
    
-},[props.elemnt.Discount]);
+},[props.elemnt.Discount ,ValueDisscount]);
     return(
         <div className="productCardContiner">
             <div  onClick={()=>navigation('/ProductPage',{state:props.elemnt})}  className="imgeContiner">
                    <img alt="product imge" src={props.imgeurl} className='ProductImg' />
             </div>
-            {haveDisscount && <p style={{backgroundColor:"red" , color:"white" , fontWeight:'bold' , width:'fit-content' , padding:"3px" , borderRadius:"25px"}}>{`Sale ${props.elemnt.Discount.value} %`}</p>}
+            {haveDisscount && <p style={{backgroundColor:"red" , color:"white" , fontWeight:'bold' , width:'fit-content' , padding:"3px" , borderRadius:"25px"}}>{`Sale ${ValueDisscount ? ValueDisscount :props.elemnt.Discount.value} %`}</p>}
             <div className='TextContiner'>
               <p className='ProductName'>{props.name}</p>
               <p className='Productmodel'>category: {props.model}</p>

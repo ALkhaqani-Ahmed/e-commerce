@@ -41,6 +41,7 @@ const AddProduct = () => {
             image:imageurl,
             price:price,
             title:name,
+            Discount:{state:false, value:0}
         };
    
         dispatch(AddNewProduct(Data));
