@@ -3,12 +3,11 @@ import Header from '../../Components/Header/Header';
 import {CartItems} from '../../Features/ProductsReducer';
 import {useSelector } from "react-redux";
 import ProductCard from '../../Components/ProductCard/ProductCard';
-
+import {useNavigate} from 'react-router-dom';
 const Cart = () => {
 const Data = useSelector(CartItems);
 
-console.log(Data);
-
+const Navigation = useNavigate();
 
 
     return(
@@ -21,6 +20,8 @@ console.log(Data);
           )
      }  )}
 
+          
+       {Data.length > 0 && <button onClick={()=> Navigation('/Checkout')}>Checkout</button>}
        {/* {Data.map(e => {
         <p key={e.sku}>{e.name}</p>
        } )}
