@@ -4,6 +4,8 @@ import {CartItems} from '../../Features/ProductsReducer';
 import {useSelector } from "react-redux";
 import ProductCard from '../../Components/ProductCard/ProductCard';
 import {useNavigate} from 'react-router-dom';
+import Button from '@mui/material/Button';
+
 const Cart = () => {
 const Data = useSelector(CartItems);
 
@@ -21,7 +23,7 @@ const Navigation = useNavigate();
      }  )}
 
           
-       {Data.length > 0 && <button onClick={()=> Navigation('/Checkout')}>Checkout</button>}
+       {Data.length > 0 && <Button variant="outlined" onClick={()=> Navigation('/Checkout')}>Checkout</Button>}
        {/* {Data.map(e => {
         <p key={e.sku}>{e.name}</p>
        } )}

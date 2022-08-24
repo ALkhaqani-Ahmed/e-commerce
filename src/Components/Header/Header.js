@@ -6,6 +6,7 @@ import {athintication , Admines ,Userinfo , userAthunticated,usersignOutOpertion
 import {useNavigate} from 'react-router-dom';
 import imageBacgroundheder from '../../assest/pexels-alexandra-maria-318236.jpg';
 import IamgeCart from '../../assest/pexels-ksenia-chernaya-3965548.jpg';
+import Login from '../../assest/login.jpg';
 const Header =()=> {
 
 const CartData = useSelector(CartItems);
@@ -18,9 +19,21 @@ const path = window.location.pathname;
 const dispatch = useDispatch();
 const Navigation = useNavigate();
 
+
+let bvackground ;
+
+ if(path === "/Cart"){
+bvackground =IamgeCart;
+ }else if(path === "/Login"){
+bvackground = Login ;
+ }else{
+bvackground = imageBacgroundheder;
+ }
+
+
    const headerStyle = {
     width:"100%" , height:"100vh",
-    background:`linear-gradient(to bottom ,rgba(0, 0, 0, 0.7) , rgba(0, 0, 0, 0.7)),url(${path === "/Cart" ? IamgeCart:imageBacgroundheder})`,
+    background:`linear-gradient(to bottom ,rgba(0, 0, 0, 0.7) , rgba(0, 0, 0, 0.7)),url(${bvackground})`,
     backgroundPosition: "center",
     backgroundSize: "cover",
     // borderRadius:"0 0 10% 10%" , 
@@ -70,7 +83,7 @@ shopping_cart
           </div>
             
           
-                         <h1 style={{marginTop:"15%" ,textAlign:"center", fontWeight:'bold',fontSize:"5rem",color:'white'}}>E Shope</h1>
+                         <h1 style={{marginTop:"15%" ,textAlign:"center", fontWeight:'bold',fontSize:"5rem",color:'white'}}>{!path === '/Login'?"E Shope":null }</h1>
                      
 
       </div>

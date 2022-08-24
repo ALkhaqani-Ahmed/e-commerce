@@ -27,12 +27,13 @@ color: rgb(250, 246, 246);
 }
 .ProductName {
     font-weight:bold; 
+    color:black
 }
 .Productprice {
     
 
     font-weight:bold;
-    color: red;
+    color: green;
 
 }
 .Productdescription{
@@ -49,4 +50,7 @@ color: rgb(250, 246, 246);
 }
 .button:hover {
     color: green;
+}
+.Productmodel{
+   color:black
 }
