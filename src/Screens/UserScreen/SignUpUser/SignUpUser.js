@@ -2,6 +2,11 @@ import React, {useEffect , useState} from "react";
 import { useNavigate } from "react-router-dom";
 import {useDispatch, useSelector} from'react-redux';
 import {userSignUp,ERRORinSignup,GetallUsers} from '../../../Features/UserReducer';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import './SignUpuser.css';
+import Header from '../../../Components/Header/Header';
 
 const SignUpUser =()=> {
 
@@ -24,6 +29,8 @@ const SignUpUser =()=> {
     };
 
 
+
+
     useEffect(()=>{
         if(signUpStateError ==="Done"){
             navigate('/Login');
@@ -34,15 +41,21 @@ const SignUpUser =()=> {
     },[signUpStateError])
 
     return (
-        <div >
-            <div className="SignUpUserContainer">
-                <input  value={name} className="input_Signup"placeholder="Name" type="text" onChange={event =>setName(event.target.value)}/>
-                <input  value={email} className="input_Signup"placeholder="Email" type="email" onChange={event =>setEmail(event.target.value)}/>
-                <input  value={password} className="input_Signup"placeholder="Password" type="password" onChange={event =>setPassword(event.target.value)}/>
-                <input  value={phoneNumber} className="input_Signup"placeholder="PhoneNumber" type="number" onChange={event =>setPhoneNumber(event.target.value)}/>
-                <button className="SignUpButton" disabled={!(name && email && password && phoneNumber)} onClick={SendDataToServer}>SignUp</button>
-                <p className="LoginBPageButton" onClick={()=>navigate ("/Login")}>Log In If you have been Signed</p>
-            </div>
+        <div>
+            <Header />
+            <Box   component="form"
+      sx={{
+        '& > :not(style)': { m: 4, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off" >
+                <TextField variant="standard" label="Name"  value={name} placeholder="Name" type="text" onChange={event =>setName(event.target.value)}/>
+                <TextField variant="standard" label="Email"  value={email} placeholder="Email" type="email" onChange={event =>setEmail(event.target.value)}/>
+                <TextField  variant="standard" label="Password" value={password} placeholder="Password" type="password" onChange={event =>setPassword(event.target.value)}/>
+                <TextField  className = "Phonenumbersignup" variant="standard" label="PhoneNumber" value={phoneNumber} placeholder="PhoneNumber" type="number" onChange={event =>setPhoneNumber(event.target.value)}/>
+                <Button  disabled={!(name && email && password && phoneNumber)} onClick={SendDataToServer}>SignUp</Button>
+                <Button  onClick={()=>navigate ("/Login")}>Log In If you have been Signed</Button>
+            </Box>
                  {message}
 
 

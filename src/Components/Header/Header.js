@@ -7,6 +7,7 @@ import {useNavigate} from 'react-router-dom';
 import imageBacgroundheder from '../../assest/pexels-alexandra-maria-318236.jpg';
 import IamgeCart from '../../assest/pexels-ksenia-chernaya-3965548.jpg';
 import Login from '../../assest/login.jpg';
+import SignupImage from "../../assest/signup.jpg";
 const Header =()=> {
 
 const CartData = useSelector(CartItems);
@@ -26,6 +27,8 @@ let bvackground ;
 bvackground =IamgeCart;
  }else if(path === "/Login"){
 bvackground = Login ;
+ }else if(path === "/SignupUser"){
+    bvackground = SignupImage ;
  }else{
 bvackground = imageBacgroundheder;
  }
@@ -85,7 +88,7 @@ shopping_cart
   const FullHeader = (
     <div style={headerStyle}>
     {buttonsIntheHeaders} 
-     <h1 style={{marginTop:"15%" ,textAlign:"center", fontWeight:'bold',fontSize:"5rem",color:'white'}}>{path === '/Login'?null:"E Shope" }</h1>
+     <h1 style={{marginTop:"15%" ,textAlign:"center", fontWeight:'bold',fontSize:"5rem",color:'white'}}>{path === '/Login' || path === "/SignupUser"?null:"E Shope" }</h1>
      </div>
   )
 
@@ -104,8 +107,7 @@ shopping_cart
    }else if(path === '/ProductPage' || path === '/Search'){
    headerContient = SimpleHeader ; 
    }else{
-    headerContient = null ;
-   }
+    headerContient = FullHeader ;   }
 
   return headerContient
 
