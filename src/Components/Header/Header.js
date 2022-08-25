@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect,useState , Fragment} from 'react';
 import {Link} from 'react-router-dom';
 import {CartItems} from '../../Features/ProductsReducer';
 import {useSelector,useDispatch} from 'react-redux';
@@ -44,9 +44,50 @@ const buttonStyle = {
     outline: "none",
     background:'none',
     border:"none", 
-    fontWeight:'bold', 
+    fontWeight:'bold',
+    color:'black'
 };
 
+
+  const buttonsIntheHeaders = (
+    <div style={{display:'flex' , justifyContent:'space-between',paddingTop:'10px',paddingRight:'10px',paddingLeft:'10px'}}>
+    <div >
+              <button  onClick={()=>Navigation('/')} style={{...buttonStyle , color:path === '/'? "yellow":'white'}} disabled={path === '/' ? true : false} >
+              <span class="material-symbols-outlined">
+home_app_logo
+</span></button> 
+            <button onClick={()=>Navigation('/Cart')}  style={{...buttonStyle , color:path === '/Cart'? "yellow":'white'}} disabled={path === '/Cart' ? true : false} >
+            <span class="material-symbols-outlined">
+shopping_cart
+</span> {CartData.length}</button>
+
+           </div> 
+            
+        <div style={{display:'flex'}} >
+        < button  onClick={()=>Navigation('/Login')}  style={{...buttonStyle , color:path === '/Login'? "yellow":'white'}} disabled={path === '/Login' ? true : false} > {athunticationState || userAthunticationState ? `Welcome ${name}` : "Login"}  </button>
+
+                   { userAthunticationState &&    <button style={buttonStyle} onClick={()=>dispatch(usersignOutOpertion())}> LogOut   </button>}
+
+{ path === "/Search" ? null :<button   style={{...buttonStyle, backgroundColor:'white',border:'none', borderRadius:'30px',width:"200px",display:'flex' }} onClick={()=>Navigation('/Search')}><span className="material-symbols-outlined">search</span></button>}
+
+        </div>
+        </div>
+  )
+
+
+  const SimpleHeader = (
+    <div style={{height:"50px" , backgroundColor:'gray',position:path === "/Search"?"relative":"fixed",width:'100%'}}>
+    {buttonsIntheHeaders} 
+</div>
+  );
+
+
+  const FullHeader = (
+    <div style={headerStyle}>
+    {buttonsIntheHeaders} 
+     <h1 style={{marginTop:"15%" ,textAlign:"center", fontWeight:'bold',fontSize:"5rem",color:'white'}}>{path === '/Login'?null:"E Shope" }</h1>
+     </div>
+  )
 
    useEffect(()=>{
        if(athunticationState){
@@ -55,39 +96,18 @@ const buttonStyle = {
            setName(userInfoOF.name)
        }
    },[athunticationState ,userAthunticationState]);
-  return(
-      <div style={headerStyle}>
-          <div style={{display:'flex' , justifyContent:'space-between',paddingTop:'10px',paddingRight:'10px',paddingLeft:'10px'}}>
-          <div >
-                    <button  onClick={()=>Navigation('/')} style={{...buttonStyle , color:path === '/'? "yellow":'white'}} disabled={path === '/' ? true : false} >
-                    <span class="material-symbols-outlined">
-home_app_logo
-</span></button> 
-                  <button onClick={()=>Navigation('/Cart')}  style={{...buttonStyle , color:path === '/Cart'? "yellow":'white'}} disabled={path === '/Cart' ? true : false} >
-                  <span class="material-symbols-outlined">
-shopping_cart
-</span> {CartData.length}</button>
 
-                 </div> 
-                  
-              <div style={{display:'flex'}} >
-              < button  onClick={()=>Navigation('/Login')}  style={{...buttonStyle , color:path === '/Login'? "yellow":'white'}} disabled={path === '/Login' ? true : false} > {athunticationState || userAthunticationState ? `Welcome ${name}` : "Login"}  </button>
+   let headerContient ;
 
-                         { userAthunticationState &&    <button style={buttonStyle} onClick={()=>dispatch(usersignOutOpertion())}> LogOut   </button>}
+   if(path === '/Cart' || path === '/Login' || path === '/'){
+      headerContient = FullHeader ;
+   }else if(path === '/ProductPage' || path === '/Search'){
+   headerContient = SimpleHeader ; 
+   }else{
+    headerContient = null ;
+   }
 
-              <button   style={{...buttonStyle, backgroundColor:'white',border:'none', borderRadius:'30px',width:"200px",display:'flex' }} onClick={()=>Navigation('/Search')}><span className="material-symbols-outlined">search</span></button>
-
-              </div>
-              
-
-          </div>
-            
-          
-                         <h1 style={{marginTop:"15%" ,textAlign:"center", fontWeight:'bold',fontSize:"5rem",color:'white'}}>{!path === '/Login'?"E Shope":null }</h1>
-                     
-
-      </div>
-  )
+  return headerContient
 
 }
 

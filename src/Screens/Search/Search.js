@@ -1,10 +1,10 @@
-import React,{useEffect,useState} from 'react';
+import React,{Fragment, useEffect,useState} from 'react';
 import {useSelector , useDispatch} from 'react-redux';
 import {SearchResult , ProductsSearch,getAllProudtsFromServer,PData} from '../../Features/ProductsReducer';
 import ProductCard from '../../Components/ProductCard/ProductCard';
 import fuzzysort  from 'fuzzysort';
 import{athintication} from '../../Features/UserReducer';
-
+import Header from '../../Components/Header/Header';
 const Search = props =>{
 
 const dispatch = useDispatch();
@@ -36,10 +36,13 @@ useEffect(()=>{
 
 
 return(
-        <div style={{width:'100%',height:'100vh'}}>
-            <div>
+    <Fragment>
+<Header />
+
+<div style={{width:'100%',height:'100vh',margin:'0 auto'}}>
+            <div style={{ margin:"auto" , width:"fit-content",marginTop:"10px",border:'2px solid gray',padding:"5px",borderRadius:"30px",justifyContent:'center',alignContent:"center",alignItems:'center'}}>
             <span className="material-symbols-outlined">search</span>
-            <input onChange={event=>SetWordsSear(event.target.value)}  placeholder="Type product name"/>    
+            <input style={{border:"none",outline: "none"}} onChange={event=>SetWordsSear(event.target.value)}  placeholder="Type product name"/>    
             </div>
 
 
@@ -50,6 +53,8 @@ return(
                 )
             })}
         </div>
+    </Fragment>
+   
     )
 }
 
