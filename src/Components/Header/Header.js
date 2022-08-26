@@ -83,7 +83,7 @@ shopping_cart
 
 
   const SimpleHeader = (
-    <div style={{height:"50px" , backgroundColor:'gray',position:path === "/Search"?"relative":"fixed",width:'100%'}}>
+    <div style={{height:"50px" , backgroundColor:'gray',position:(path === "/Search" ||  path === "/Checkout")?"relative":"fixed",width:'100%'}}>
     {buttonsIntheHeaders} 
 </div>
   );
@@ -108,7 +108,7 @@ shopping_cart
 
    if(path === '/Cart' || path === '/Login' || path === '/'){
       headerContient = FullHeader ;
-   }else if(path === '/ProductPage' || path === '/Search'){
+   }else if(path === '/ProductPage' || path === '/Search' || path === "/Checkout"){
    headerContient = SimpleHeader ; 
    }else{
     headerContient = FullHeader ;   }

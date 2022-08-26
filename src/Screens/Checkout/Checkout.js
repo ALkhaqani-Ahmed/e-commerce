@@ -1,6 +1,14 @@
 import React from 'react';
 import {useSelector , useDispatch} from 'react-redux';
 import {CartItems} from '../../Features/ProductsReducer';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import Header from '../../Components/Header/Header';
 
 const Checkout = () => {
     const cartItems = useSelector(CartItems);
@@ -35,9 +43,14 @@ const Checkout = () => {
     };
 
     return(
-        <div>
+        <div style={{width:"100%"}}>
+             <Header />
+        <div style={{width:"100%",justifyContent:"center",alignItems:"center",alignContent:'center'}}>
+        <div style={{width:"70%"}}>
            {cartItems.map(e => <CardItem key={e.id} state={e.Discount.state} value={e.Discount.value} name={e.title} price={e.price} Quantity={e.Quantity} />)}
            <CardItem name="total" type="total"  price={CounttheTotalPayment()} />
+        </div>
+        </div>
         </div>
     )
 }
