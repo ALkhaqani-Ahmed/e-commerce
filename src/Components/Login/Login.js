@@ -5,6 +5,10 @@ import {athunticationOperation , athintication,MakeSinupErrorFalse} from '../../
 import { useNavigate ,Link } from "react-router-dom";
 import {getAllProudtsFromServer ,Massage} from '../../Features/ProductsReducer';
 import './Login.css';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+
 // import { Button } from 'react-bootstrap';
 
 
@@ -38,20 +42,21 @@ useEffect(()=>{
    <div>
      <Header />
    
-   <div style={{padding:"70px" , borderRadius:20 }}>
-     <input className="buttonlog"placeholder="Email" type="email" onChange={event =>setEmial(event.target.value)}/> 
-     <input className="buttonlog"placeholder="Password" type="password" onChange={event =>setPassword(event.target.value) }/> 
-  <button  style={{ borderRadius:20 ,backgroundColor:'blue'}} onClick={()=>dispatch(athunticationOperation({email,password}))}>Login</button>
+   <Box component="form"
+      sx={{
+        '& > :not(style)': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off" style={{padding:"70px" , borderRadius:20 }}>
+     <TextField label="email" placeholder="Email" type="email" onChange={event =>setEmial(event.target.value)}/> 
+     <TextField label="password" placeholder="Password" type="password" onChange={event =>setPassword(event.target.value) }/> 
+  <Button  onClick={()=>dispatch(athunticationOperation({email,password}))}>Login</Button>
   {/* <button disabled={path === '/SignUp' ? true : false}variant="primary">SignUp if you have not signed Up</button> */}
  
- <Link to="/SignUp">
- <div style={{cursor: 'pointer' , borderRadius:20 ,  backgroundColor:'blue' , width:'fit-content'}} > 
- <p style={{padding:5, color:"white"}}>SignUp if you are not</p></div>
-
- </Link>
-
-
-   </div>
+ 
+ <Button onClick={()=>navigation("/SignUp")} > 
+SignUp if you are not</Button>
+   </Box>
    </div>
  )
 }

@@ -8,6 +8,8 @@ import imageBacgroundheder from '../../assest/pexels-alexandra-maria-318236.jpg'
 import IamgeCart from '../../assest/pexels-ksenia-chernaya-3965548.jpg';
 import Login from '../../assest/login.jpg';
 import SignupImage from "../../assest/signup.jpg";
+import Admin from '../../assest/Admin.jpg';
+
 const Header =()=> {
 
 const CartData = useSelector(CartItems);
@@ -29,6 +31,8 @@ bvackground =IamgeCart;
 bvackground = Login ;
  }else if(path === "/SignupUser"){
     bvackground = SignupImage ;
+ }if(path === '/AdminPort' || path === "/LoginAdmin"){
+bvackground = Admin ;
  }else{
 bvackground = imageBacgroundheder;
  }
@@ -88,8 +92,8 @@ shopping_cart
   const FullHeader = (
     <div style={headerStyle}>
     {buttonsIntheHeaders} 
-     <h1 style={{marginTop:"15%" ,textAlign:"center", fontWeight:'bold',fontSize:"5rem",color:'white'}}>{path === '/Login' || path === "/SignupUser"?null:"E Shope" }</h1>
-     </div>
+{ (path === "/AdminPort" || path === "/LoginAdmin" ) ? <h1 style={{marginTop:"15%" ,textAlign:"center", fontWeight:'bold',fontSize:"5rem",color:'white'}}>Welcome Admin</h1>: <h1 style={{marginTop:"15%" ,textAlign:"center", fontWeight:'bold',fontSize:"5rem",color:'white'}}>{path === '/Login' || path === "/SignupUser"?null:"E Shope" }</h1>
+}     </div>
   )
 
    useEffect(()=>{
